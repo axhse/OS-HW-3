@@ -34,33 +34,35 @@
 Потоки циклично обрабатывают по 1 запросу  
 `Server` пробует найти товар у обоих `Seller`  
 
-Программы расположены в исходниках(TODO) с соответсвующими названиями  
+Программы расположены в [исходниках](https://github.com/axhse/OS-HW-3/tree/main/solution) с соответсвующими названиями  
 
 4. Запуск
+
+Тестировалось на WSL  
 
 Для всех программ имеются сетевые настройки по умолчанию:
 1) ip-адреса определяются как INADDR_ANY
 2) определено 4 порта по умолчанию — для `Сustomer`, для `Observer` и 2 для `Seller`
 
-Опции комадной строки для клиентов:
- • `--server-ip` — ip-адрес сервера
- • `--server-port` — порт сервера
- • `--tempo` — искусственные паузы программ в миллисекнудах, от 1 до 10000
- • `--id` — целочисленный идентификатор, для `Сustomer` и `Observer`
+Опции комадной строки для клиентов:  
+ • `--server-ip` — ip-адрес сервера  
+ • `--server-port` — порт сервера  
+ • `--tempo` — искусственные паузы программ в миллисекнудах, от 1 до 10000  
+ • `--id` — целочисленный идентификатор, для `Сustomer` и `Observer`  
 
- • `--products` — файл со списком покупок, обязательное, для `Сustomer`
- • `--products` — файл с ассортиментом товаров, обязательное, для `Seller`
- • `--is-second` — обязательное для второго `Seller`
+ • `--products` — файл со списком покупок, обязательное, для `Сustomer`  
+ • `--products` — файл с ассортиментом товаров, обязательное, для `Seller`  
+ • `--is-second` — обязательное для второго `Seller`  
 
-Опции для сервера:
- • `--customer-ip` — ip-адрес для `Customer`
- • `--seller1-ip` — ip-адрес для первого `Seller`
- • `--seller2-ip` — ip-адрес для второго `Seller`
- • `--observer-ip` — ip-адрес для `Observer`
- • `--customer-port` — порт для `Customer`
- • `--seller1-port` — порт для первого `Seller`
- • `--seller2-port` — порт для второго `Seller`
- • `--observer-port` — порт для `Observer`
+Опции для сервера:  
+ • `--customer-ip` — ip-адрес для `Customer`  
+ • `--seller1-ip` — ip-адрес для первого `Seller`  
+ • `--seller2-ip` — ip-адрес для второго `Seller`  
+ • `--observer-ip` — ip-адрес для `Observer`  
+ • `--customer-port` — порт для `Customer`  
+ • `--seller1-port` — порт для первого `Seller`  
+ • `--seller2-port` — порт для второго `Seller`  
+ • `--observer-port` — порт для `Observer`  
 
 Компиляция всех программ:
 ```
@@ -114,9 +116,24 @@ gcc solution/observer.c -o observer.out
 
 7. Примеры работы программ
 
-TODO
+[Работают 1 Customer и 1 Observer](https://github.com/axhse/OS-HW-3/blob/main/demo/working2.png)  
+[Команды для запуска](https://github.com/axhse/OS-HW-3/blob/main/demo/starting.png)  
+[Работают 2 Customer и 2 Observer](https://github.com/axhse/OS-HW-3/blob/main/demo/working4.png)  
+[Работа на localhost](https://github.com/axhse/OS-HW-3/blob/main/demo/custom%20networking.png)  
+[Остановлен Customer](https://github.com/axhse/OS-HW-3/blob/main/demo/customer%20stopped.png)  
+Вся программа продолжает работать без ошибок  
+[Остановлен Seller](https://github.com/axhse/OS-HW-3/blob/main/demo/seller%20stopped.png)  
+`Customer 22222` не получил ответа от сервера и остановился  
+`Server` ждет переподключения `Seller 1`  
+`Customer 11111` ждет ответа от `Server`  
+Запросы `Observer` успешно обрабатываются  
+[Остановлен Server](https://github.com/axhse/OS-HW-3/blob/main/demo/server%20stopped.png)  
+Все клиенты поняли, что сервер недоступен и остановились  
+`Customer` не получили ожидаемого ответа от сервера,  
+вывели сообщение об ошибке и также контролируемо остановились  
 
 8. Остановки
+
 Клиенты остановливаются, когда `Server` не доступен или если передача данных с ним оборвалась  
 `Server` не останавливается никогда, ожидая новых подключений от всех клиентов  
 
@@ -145,5 +162,5 @@ TODO
 
 ### На оценку 10
 
-После принужденной остановки сервера штатно останавливаются все клиенты, понимая, что сервер недоступен  
+После принудительной остановки сервера штатно останавливаются все клиенты, понимая, что сервер недоступен  
 В этот момент может оборваться передача данных  
